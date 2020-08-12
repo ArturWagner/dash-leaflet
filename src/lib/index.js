@@ -24,6 +24,7 @@ import VideoOverlay from './components/VideoOverlay.react';
 import WMSTileLayer from './components/WMSTileLayer.react';
 import ScaleControl from './components/ScaleControl.react';
 import SuperCluster from './components/SuperCluster.react';
+import DrawToolbar from './components/DrawToolbar.react';
 
 export {
     Circle,
@@ -50,5 +51,6 @@ export {
     PolylineDecorator,
     Pane,
     SuperCluster,
-    DivMarker
+    DivMarker,
+    DrawToolbar
 };

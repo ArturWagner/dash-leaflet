@@ -1,7 +1,8 @@
 /* eslint no-magic-numbers: 0 */
 import React, { Component } from 'react';
-
-import { Map, TileLayer, SuperCluster, Marker } from '../lib';
+// import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+// import { DrawToolbar } from '../lib'
+import { Map, TileLayer, SuperCluster, Marker, DrawToolbar } from '../lib';
 //import LeafletMarkerClusterGroup from '../lib/LeafletMarkerClusterGroup';
 import regeneratorRuntime from "regenerator-runtime";
 
@@ -29,30 +30,18 @@ class App extends Component {
     }
 
     render() {
-        const pos = [37.8, 50]; // (-37.8, 175.3)
-        let positions = []; //[[56,10], [56,10], [56,10], [56,10], [56,10]];
-        for(let i =0; i < 100; i++){
-            positions.push(pos)
-        }
-        let features = positions.map((pos) => ({"type": "Feature", "geometry": {"type": "Point", "coordinates": [pos[1], pos[0]]}}));
-        let geojson = {"type": "FeatureCollection", "features": features};
-        let clusterOptions = {
-            iconSize: 40,
-            classNames: [
-                {minCount: 0, className: "marker-cluster marker-cluster-small"},
-                {minCount: 100, className: "marker-cluster marker-cluster-medium"},
-                {minCount: 1000, className: "marker-cluster marker-cluster-large"},
-            ]
-        }
         return (
             <div>
-                <Map
-                    setProps={this.setProps} zoom={8} center={pos}
-//                    setProps={this.setProps} zoom={8} center={[-37, 175]}
-                    {...this.state}>
-                        <TileLayer/>
-                            <SuperCluster setProps={this.setProps} data={geojson} maxZoom={16} clusterOptions={clusterOptions}>
-                            </SuperCluster>
+                <Map id='map' center={[51.505, -0.09]} zoom={1}
+                    onClick={this.handleClick}
+                    onLocationfound={this.handleLocationFound}
+                    ref={this.mapRef}
+                    style={{ height: '50vh'}}>
+                    <TileLayer
+                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <DrawToolbar id='map'></DrawToolbar>
                 </Map>
             </div>
         )
