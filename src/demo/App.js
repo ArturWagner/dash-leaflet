@@ -24,7 +24,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            value: 'hello'
+            data: '{}'
         };
         this.setProps = this.setProps.bind(this);
     }
@@ -53,7 +53,7 @@ class App extends Component {
                             onCreated={this._onCreate}
                             onDeleted={this._onDeleted}
                             setProps={this.setProps}
-                            value={this.state.value}
+                            data={this.state.data}
                             draw={{
                                 rectangle: false
                             }}

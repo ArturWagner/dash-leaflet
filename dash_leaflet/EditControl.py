@@ -8,6 +8,8 @@ class EditControl(Component):
 
 
 Keyword arguments:
+- id (string; optional)
+- data (string; optional)
 - draw (dict; optional): draw has the following type: dict containing keys 'polyline', 'polygon', 'rectangle', 'circle', 'marker'.
 Those keys have the following types:
   - polyline (dict | boolean; optional)
@@ -28,16 +30,14 @@ Those keys have the following types:
   - layerContainer (dict; optional): layerContainer has the following type: dict containing keys 'addLayer', 'removeLayer'.
 Those keys have the following types:
   - addLayer (required)
-  - removeLayer (required)
-- id (string; optional)
-- value (string; optional)"""
+  - removeLayer (required)"""
     @_explicitize_args
-    def __init__(self, onCreated=Component.UNDEFINED, onMounted=Component.UNDEFINED, draw=Component.UNDEFINED, edit=Component.UNDEFINED, position=Component.UNDEFINED, leaflet=Component.UNDEFINED, id=Component.UNDEFINED, value=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['draw', 'edit', 'position', 'leaflet', 'id', 'value']
+    def __init__(self, id=Component.UNDEFINED, data=Component.UNDEFINED, onCreated=Component.UNDEFINED, onMounted=Component.UNDEFINED, draw=Component.UNDEFINED, edit=Component.UNDEFINED, position=Component.UNDEFINED, leaflet=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'data', 'draw', 'edit', 'position', 'leaflet']
         self._type = 'EditControl'
         self._namespace = 'dash_leaflet'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['draw', 'edit', 'position', 'leaflet', 'id', 'value']
+        self.available_properties = ['id', 'data', 'draw', 'edit', 'position', 'leaflet']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

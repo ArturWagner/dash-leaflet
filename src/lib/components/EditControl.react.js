@@ -1,6 +1,7 @@
  
 import { PropTypes } from 'prop-types';
 import Draw from 'leaflet-draw'; // eslint-disable-line
+import '../../assets/draw.css';
 import isEqual from 'lodash-es/isEqual';
 
 import { MapControl, withLeaflet } from 'react-leaflet';
@@ -27,6 +28,8 @@ class EditControl extends MapControl {
       acc[val] = PropTypes.func;
       return acc;
     }, {}),
+    id: PropTypes.string,
+    data: PropTypes.string,
     onCreated: PropTypes.func,
     onMounted: PropTypes.func,
     draw: PropTypes.shape({
@@ -54,9 +57,7 @@ class EditControl extends MapControl {
         addLayer: PropTypes.func.isRequired,
         removeLayer: PropTypes.func.isRequired
       })
-    }),
-    id: PropTypes.string,
-    value: PropTypes.string
+    })
   };
 
   createLeafletElement(props) {
@@ -66,8 +67,8 @@ class EditControl extends MapControl {
   onDrawCreate = (e) => {
     const { onCreated } = this.props;
     const { layerContainer } = this.props.leaflet;
-    this.props.setProps({value: this.props.value + 'OIEEEE'});
     layerContainer.addLayer(e.layer);
+    this.props.setProps({ data: addLayer(e, this.props.data)})
     onCreated && onCreated(e);
   };
 
@@ -81,6 +82,11 @@ class EditControl extends MapControl {
         let handlers = Object.keys(eventHandlers).filter(handler => eventHandlers[handler] == evt.type)
         if (handlers.length == 1) {
           let handler = handlers[0]
+          if (handler == 'onEdited'){
+            this.props.setProps({ data: addLayer(evt, this.props.data)})
+          } else if (handler == 'onDeleted'){
+            this.props.setProps({ data: removeLayer(evt, this.props.data)})
+          }
           this.props[handler] && this.props[handler](evt)
         }
       });
@@ -147,6 +153,59 @@ function createDrawElement(props) {
   return new Control.Draw(options);
 }
 
+function formatLayer(event){
+  if(event.layer){
+    return [event.layer]
+  }else{
+    let layers = []
+    for (const [key, value] of Object.entries(event.layers._layers)) {
+      layers.push(value)
+    }
+    return layers
+  }
+}
+
+function addLayer(event, data) {
+  let layers = JSON.parse(data)
+  let eventLayers = formatLayer(event)
+  eventLayers.forEach(eventLayer => {
+    let layerId = eventLayer._leaflet_id
+    let layerType = 'None'
+    let layerCoords = {}
+    let layerRadius = undefined
+    if (eventLayer._mRadius) {
+      layerType = 'Circle'
+      layerCoords = eventLayer._latlng
+      layerRadius = eventLayer._mRadius
+    } else {
+      if (Array.isArray(eventLayer._latlngs)) {
+        layerType = 'Polygon'
+        layerCoords = eventLayer._latlngs[0]
+      } else {
+        layerType = 'Marker'
+        layerCoords = eventLayer._latlng
+      }
+    }
+    layers[layerId] = {
+      id: layerId,
+      type: layerType,
+      coords: layerCoords,
+      radius: layerRadius
+    }
+  })
+  return JSON.stringify(layers)
+}
+
+function removeLayer(event, data) {
+  let layers = JSON.parse(data)
+  let eventLayers = formatLayer(event)
+  eventLayers.forEach(eventLayer => {
+    let layerId = eventLayer._leaflet_id
+    delete layers[layerId]
+  });
+  return JSON.stringify(layers)
+}
+
 export default withLeaflet(EditControl);
 
 EditControl.propTypes = {
@@ -157,7 +216,7 @@ EditControl.propTypes = {
     /**
      * Value
      */
-    value: PropTypes.string,
+    data: PropTypes.string,
     /**
      * Function
      */

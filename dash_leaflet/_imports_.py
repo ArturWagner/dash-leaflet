@@ -3,7 +3,6 @@ from .CircleMarker import CircleMarker
 from .Colorbar import Colorbar
 from .DivMarker import DivMarker
 from .DivOverlay import DivOverlay
-from .DrawToolbar import DrawToolbar
 from .EditControl import EditControl
 from .FeatureGroup import FeatureGroup
 from .GeoJSON import GeoJSON
@@ -37,7 +36,6 @@ __all__ = [
     "Colorbar",
     "DivMarker",
     "DivOverlay",
-    "DrawToolbar",
     "EditControl",
     "FeatureGroup",
     "GeoJSON",
