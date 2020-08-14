@@ -1,13 +1,6 @@
 /* eslint no-magic-numbers: 0 */
 import React, { Component } from 'react';
-// import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-// import { DrawToolbar } from '../lib'
-import { Map, TileLayer, SuperCluster, Marker, DrawToolbar, FeatureGroup } from '../lib';
-//import LeafletMarkerClusterGroup from '../lib/LeafletMarkerClusterGroup';
-import regeneratorRuntime from "regenerator-runtime";
-import EditControl from "../lib/components/EditControl.react";
-// import FeatureGroup from "../lib/components/FeatureGroup.react";
-
+import { Map, TileLayer, FeatureGroup, EditControl } from '../lib';
 
 var geojson = {
     "type": "FeatureCollection", "features": [
@@ -52,21 +45,9 @@ class App extends Component {
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {/* <DrawToolbar id='map' value='abc'></DrawToolbar> */}
                     <FeatureGroup
-                        // onlayeradd={function (event) {
-                        //     // let layers = JSON.parse(window.sessionStorage.getItem(storage))
-                        //     // layers = addLayer(event, layers)
-                        //     value = 'ventura topzera'
-                        // }}
-                        // onlayerremove={
-                        //     function (event) {
-                        //         // let layers = JSON.parse(window.sessionStorage.getItem(storage))
-                        //         // layers = removeLayer(event, layers)
-                        //         value = 'ventura topzera removido'
-                        //     }}
                     >
-                        <DrawToolbar
+                        <EditControl
                             position='topright'
                             onEdited={this._onEditPath}
                             onCreated={this._onCreate}

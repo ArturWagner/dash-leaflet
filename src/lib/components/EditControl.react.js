@@ -54,7 +54,9 @@ class EditControl extends MapControl {
         addLayer: PropTypes.func.isRequired,
         removeLayer: PropTypes.func.isRequired
       })
-    })
+    }),
+    id: PropTypes.string,
+    value: PropTypes.string
   };
 
   createLeafletElement(props) {
@@ -64,10 +66,7 @@ class EditControl extends MapControl {
   onDrawCreate = (e) => {
     const { onCreated } = this.props;
     const { layerContainer } = this.props.leaflet;
-    console.log('AQUI CHEGOU E MUDOU PRA OIEEE?');
-    console.log(this.props)
-    console.log(e)
-    this.props.setProps({value: 'OIEEEE'});
+    this.props.setProps({value: this.props.value + 'OIEEEE'});
     layerContainer.addLayer(e.layer);
     onCreated && onCreated(e);
   };
@@ -120,6 +119,9 @@ class EditControl extends MapControl {
     this.leafletElement.addTo(map);
 
     return null;
+  }
+  render(){
+    return null
   }
 
 }

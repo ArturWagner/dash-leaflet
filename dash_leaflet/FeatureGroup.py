@@ -8,14 +8,15 @@ class FeatureGroup(Component):
 
 
 Keyword arguments:
+- children (a list of or a singular dash component, string or number; optional): The children of this component (dynamic)
 - id (string; optional): The ID used to identify this component in Dash callbacks"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id']
+    def __init__(self, children=None, id=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id']
         self._type = 'FeatureGroup'
         self._namespace = 'dash_leaflet'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id']
+        self.available_properties = ['children', 'id']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')
@@ -27,4 +28,4 @@ Keyword arguments:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
-        super(FeatureGroup, self).__init__(**args)
+        super(FeatureGroup, self).__init__(children=children, **args)

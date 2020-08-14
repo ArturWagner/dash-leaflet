@@ -19,5 +19,9 @@ FeatureGroup.propTypes = {
      * The ID used to identify this component in Dash callbacks
      */
     id: PropTypes.string,
+    /**
+     * The children of this component (dynamic)
+     */
+    children: PropTypes.node,
 };
 

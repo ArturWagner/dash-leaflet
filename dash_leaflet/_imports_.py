@@ -4,6 +4,7 @@ from .Colorbar import Colorbar
 from .DivMarker import DivMarker
 from .DivOverlay import DivOverlay
 from .DrawToolbar import DrawToolbar
+from .EditControl import EditControl
 from .FeatureGroup import FeatureGroup
 from .GeoJSON import GeoJSON
 from .GeoTIFFOverlay import GeoTIFFOverlay
@@ -37,6 +38,7 @@ __all__ = [
     "DivMarker",
     "DivOverlay",
     "DrawToolbar",
+    "EditControl",
     "FeatureGroup",
     "GeoJSON",
     "GeoTIFFOverlay",
