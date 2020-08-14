@@ -770,9 +770,240 @@
       }
     }
   },
-  "src/lib/components/DrawToolbar.react.js": {
+  "src/lib/components/EditControl.react.js": {
     "description": "",
-    "displayName": "DrawToolbar",
+    "displayName": "EditControl",
+    "methods": [
+      {
+        "name": "createLeafletElement",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "props",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "onDrawCreate",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "data": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": ""
+      },
+      "onCreated": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": ""
+      },
+      "onMounted": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": ""
+      },
+      "draw": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "polyline": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "polygon": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "rectangle": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "circle": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "marker": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "edit": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "edit": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "remove": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "poly": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "object"
+                },
+                {
+                  "name": "bool"
+                }
+              ],
+              "required": false
+            },
+            "allowIntersection": {
+              "name": "bool",
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      },
+      "position": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'topright'",
+              "computed": false
+            },
+            {
+              "value": "'topleft'",
+              "computed": false
+            },
+            {
+              "value": "'bottomright'",
+              "computed": false
+            },
+            {
+              "value": "'bottomleft'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      },
+      "leaflet": {
+        "type": {
+          "name": "shape",
+          "value": {
+            "map": {
+              "name": "instanceOf",
+              "value": "Map",
+              "required": false
+            },
+            "layerContainer": {
+              "name": "shape",
+              "value": {
+                "addLayer": {
+                  "name": "func",
+                  "required": true
+                },
+                "removeLayer": {
+                  "name": "func",
+                  "required": true
+                }
+              },
+              "required": false
+            }
+          }
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/FeatureGroup.react.js": {
+    "description": "",
+    "displayName": "FeatureGroup",
     "methods": [],
     "props": {
       "id": {
@@ -781,6 +1012,13 @@
         },
         "required": false,
         "description": "The ID used to identify this component in Dash callbacks"
+      },
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "The children of this component (dynamic)"
       }
     }
   },

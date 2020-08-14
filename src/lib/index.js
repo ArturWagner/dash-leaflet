@@ -24,7 +24,8 @@ import VideoOverlay from './components/VideoOverlay.react';
 import WMSTileLayer from './components/WMSTileLayer.react';
 import ScaleControl from './components/ScaleControl.react';
 import SuperCluster from './components/SuperCluster.react';
-import DrawToolbar from './components/DrawToolbar.react';
+import FeatureGroup from './components/FeatureGroup.react';
+import EditControl from './components/EditControl.react'
 
 export {
     Circle,
@@ -52,5 +53,6 @@ export {
     Pane,
     SuperCluster,
     DivMarker,
-    DrawToolbar
+    FeatureGroup,
+    EditControl
 };

@@ -1,26 +1,30 @@
 /* eslint no-magic-numbers: 0 */
 import React, { Component } from 'react';
-// import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-// import { DrawToolbar } from '../lib'
-import { Map, TileLayer, SuperCluster, Marker, DrawToolbar } from '../lib';
-//import LeafletMarkerClusterGroup from '../lib/LeafletMarkerClusterGroup';
-import regeneratorRuntime from "regenerator-runtime";
+import { Map, TileLayer, FeatureGroup, EditControl } from '../lib';
 
-var geojson = {"type": "FeatureCollection", "features": [
-    {"type": "Feature", "geometry": {"type": "Point", "coordinates": [10, 56]}, 
-    "properties": {"cluster": false, "tooltip": "tooltip"}},
-        {"type": "Feature", "geometry": {"type": "Point", "coordinates": [10, 57]}, 
-    "properties": {"cluster": false, "popup": "popup"}},
-            {"type": "Feature", "geometry": {"type": "Point", "coordinates": [10, 55]}, 
-    "properties": {"cluster": false, "marker_options": {"opacity": 0.5}}}
-    ]}
+var geojson = {
+    "type": "FeatureCollection", "features": [
+        {
+            "type": "Feature", "geometry": { "type": "Point", "coordinates": [10, 56] },
+            "properties": { "cluster": false, "tooltip": "tooltip" }
+        },
+        {
+            "type": "Feature", "geometry": { "type": "Point", "coordinates": [10, 57] },
+            "properties": { "cluster": false, "popup": "popup" }
+        },
+        {
+            "type": "Feature", "geometry": { "type": "Point", "coordinates": [10, 55] },
+            "properties": { "cluster": false, "marker_options": { "opacity": 0.5 } }
+        }
+    ]
+}
 
 class App extends Component {
 
     constructor() {
         super();
         this.state = {
-            value: ''
+            data: '{}'
         };
         this.setProps = this.setProps.bind(this);
     }
@@ -36,12 +40,25 @@ class App extends Component {
                     onClick={this.handleClick}
                     onLocationfound={this.handleLocationFound}
                     ref={this.mapRef}
-                    style={{ height: '50vh'}}>
+                    style={{ height: '50vh' }}>
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <DrawToolbar id='map'></DrawToolbar>
+                    <FeatureGroup
+                    >
+                        <EditControl
+                            position='topright'
+                            onEdited={this._onEditPath}
+                            onCreated={this._onCreate}
+                            onDeleted={this._onDeleted}
+                            setProps={this.setProps}
+                            data={this.state.data}
+                            draw={{
+                                rectangle: false
+                            }}
+                        />
+                    </FeatureGroup>
                 </Map>
             </div>
         )
